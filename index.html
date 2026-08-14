@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResidentialVPS - Premium Residential VPS & RDP Hosting</title>
+    
+    <meta name="description" content="High-performance Residential VPS and Dedicated Physical Machines. Fast, secure, and genuine static Residential IPs.">
+    <meta name="keywords" content="ResidentialVPS, Residential VPS, RDP, USA VPS, Clean IP, static IP hosting, anonymous VPS">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 12s infinite',
+                        'blob-delayed': 'blob 12s infinite 3s',
+                        'blob-fast': 'blob 9s infinite',
+                        'float-3d-slow': 'float-3d-slow 8s ease-in-out infinite',
+                        'float-3d-medium': 'float-3d-slow 6s ease-in-out infinite 1s',
+                        'float-3d-fast': 'float-3d-slow 4s ease-in-out infinite 2s',
+                        'gradient-bg': 'gradient-bg 15s ease infinite',
+                        'spin-slow-3d': 'spin-3d 15s linear infinite',
+                        'pulse-glow': 'pulse-glow 3s infinite',
+                        'border-flow': 'border-flow 3s linear infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%, 100%': { transform: 'translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1) rotateX(20deg) rotateY(30deg)' },
+                            '66%': { transform: 'translate(-20px, 30px) scale(0.9) rotateX(-20deg) rotateY(-30deg)' },
+                        },
+                        'float-3d-slow': {
+                            '0%, 100%': { transform: 'translateY(0) rotateX(0) rotateY(0)' },
+                            '25%': { transform: 'translateY(-15px) rotateX(5deg) rotateY(5deg)' },
+                            '50%': { transform: 'translateY(-25px) rotateX(0deg) rotateY(10deg)' },
+                            '75%': { transform: 'translateY(-10px) rotateX(-5deg) rotateY(5deg)' },
+                        },
+                        'spin-3d': {
+                            '0%': { transform: 'rotate3d(1, 1, 1, 0deg)' },
+                            '100%': { transform: 'rotate3d(1, 1, 1, 360deg)' },
+                        },
+                        'gradient-bg': {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 0.6, transform: 'scale(1) translateZ(0)' },
+                            '50%': { opacity: 1, transform: 'scale(1.05) translateZ(20px)' },
+                        },
+                        'border-flow': {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '200% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- Live Motion Background (Emerald & Rose Theme) --- */
+        body {
+            background: linear-gradient(-45deg, #ecfdf5, #fff1f2, #f0fdf4, #ecfdf5);
+            background-size: 400% 400%;
+            animation: gradient-bg 15s ease infinite;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            transition: color 0.4s ease;
+            perspective: 1200px;
+        }
+
+        html.dark body {
+            background: linear-gradient(-45deg, #022c22, #4c0519, #064e3b, #4c0519);
+            background-size: 400% 400%;
+            animation: gradient-bg 15s ease infinite;
+            color: #f8fafc;
+        }
+
+        /* --- Glassmorphism Styles --- */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            transform-style: preserve-3d;
+        }
+        html.dark .glass-nav {
+            background: rgba(4, 20, 15, 0.65);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Unique Nav Links --- */
+        .nav-link {
+            font-weight: 700;
+            color: #64748b;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding: 0.6rem 1.25rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(244, 63, 94, 0.1));
+            border-radius: 999px;
+            z-index: -1;
+            opacity: 0;
+            transform: scale(0.8) translateZ(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover::before, .nav-link.active::before {
+            opacity: 1;
+            transform: scale(1) translateZ(0);
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #10b981;
+            transform: translateY(-2px) translateZ(10px);
+        }
+        html.dark .nav-link {
+            color: #cbd5e1;
+        }
+        html.dark .nav-link:hover, html.dark .nav-link.active {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        html.dark .nav-link::before {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(244, 63, 94, 0.2));
+        }
+
+        /* --- Neon Frosted Cards (3D Enabled) --- */
+        .card-neo {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            height: 100%;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        html.dark .card-neo {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* Float & Glow 3D Hover */
+        .card-neo:hover {
+            transform: translateY(-15px) rotateX(6deg) rotateY(-4deg) scale(1.02);
+            box-shadow: 20px 30px 50px rgba(16, 185, 129, 0.15), -20px -20px 40px rgba(244, 63, 94, 0.1);
+            border-color: rgba(16, 185, 129, 0.5);
+            z-index: 20;
+        }
+        
+        html.dark .card-neo:hover {
+            box-shadow: 20px 30px 50px rgba(16, 185, 129, 0.25), -20px -20px 50px rgba(244, 63, 94, 0.15);
+            border-color: rgba(16, 185, 129, 0.6);
+        }
+
+        /* Animated Glowing Outer Border */
+        .live-border {
+            border: 2px solid transparent;
+            background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95)) padding-box,
+                        linear-gradient(90deg, #10b981, #f43f5e, #fbbf24, #10b981) border-box;
+            background-size: 100% 100%, 200% 200%;
+            animation: border-flow 3s linear infinite;
+        }
+
+        html.dark .live-border {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.95)) padding-box,
+                        linear-gradient(90deg, #10b981, #f43f5e, #fbbf24, #10b981) border-box;
+            background-size: 100% 100%, 200% 200%;
+        }
+
+        .float-up {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateZ(20px);
+        }
+        .card-neo:hover .float-up {
+            transform: translateY(-8px) translateZ(40px);
+        }
+
+        /* --- Unique Product Detail List Styles --- */
+        .detail-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(226, 232, 240, 0.7);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        html.dark .detail-item {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+        }
+        .card-neo:hover .detail-item {
+            background: rgba(255, 255, 255, 0.98);
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateX(10px) translateZ(15px);
+            box-shadow: -6px 6px 20px rgba(16, 185, 129, 0.1);
+        }
+        html.dark .card-neo:hover .detail-item {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: -6px 6px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .detail-label-wrapper { display: flex; align-items: center; }
+        
+        .detail-label { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            color: #475569; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+        html.dark .detail-label { color: #94a3b8; }
+        
+        .detail-value { 
+            font-size: 0.85rem; 
+            font-weight: 800; 
+            color: #0f172a; 
+            text-align: right; 
+            max-width: 65%;
+            line-height: 1.2;
+        }
+        html.dark .detail-value { color: #f8fafc; }
+
+        .list-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(244, 63, 94, 0.15));
+            color: #10b981;
+            margin-right: 12px;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+        }
+        html.dark .list-icon {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(244, 63, 94, 0.25));
+            color: #34d399;
+        }
+        .card-neo:hover .list-icon {
+            transform: scale(1.2) rotateY(15deg) rotateX(10deg);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(244, 63, 94, 0.35));
+            color: #059669;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Text Gradients & Glowing Elements */
+        .text-glow {
+            background: linear-gradient(to right, #10b981, #f43f5e, #8b5cf6, #10b981);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .btn-neo {
+            background: linear-gradient(135deg, #10b981 0%, #f43f5e 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4), inset 0 2px 0 rgba(255,255,255,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+        .btn-neo::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-25deg);
+            animation: scan 2.5s infinite;
+        }
+        .btn-neo:hover {
+            transform: translateY(-6px) scale(1.05) translateZ(20px);
+            box-shadow: 0 15px 35px rgba(244, 63, 94, 0.5), inset 0 2px 0 rgba(255,255,255,0.3);
+        }
+
+        /* 3D Tabs */
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transform-style: preserve-3d;
+        }
+        .tab-inactive {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            color: #64748b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        html.dark .tab-inactive {
+            background: rgba(30, 41, 59, 0.5);
+            color: #94a3b8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .tab-inactive:hover {
+            transform: translateY(-5px) translateZ(15px) rotateX(10deg);
+            color: #10b981;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+        }
+        html.dark .tab-inactive:hover {
+            background: rgba(30, 41, 59, 0.8);
+            color: #34d399;
+        }
+        .tab-active {
+            background: linear-gradient(135deg, #10b981, #f43f5e);
+            color: white;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+            transform: translateY(-5px) translateZ(20px);
+            border: 1px solid transparent;
+        }
+
+        /* --- Live 3D Flag Animation --- */
+        @keyframes flag-3d-wave {
+            0% { transform: perspective(400px) rotateY(0deg) skewY(0deg); }
+            25% { transform: perspective(400px) rotateY(-20deg) skewY(4deg) scaleY(1.05); }
+            50% { transform: perspective(400px) rotateY(15deg) skewY(-3deg) scaleY(0.95); }
+            75% { transform: perspective(400px) rotateY(-15deg) skewY(3deg) scaleY(1.05); }
+            100% { transform: perspective(400px) rotateY(0deg) skewY(0deg); }
+        }
+
+        .tab-flag {
+            width: 26px;
+            height: 18px;
+            border-radius: 2px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2), inset 0 0 2px rgba(255,255,255,0.3);
+            object-fit: cover;
+            transform-origin: left center;
+            animation: flag-3d-wave 2.5s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .tab-btn:hover .tab-flag {
+            animation: flag-3d-wave 1s ease-in-out infinite;
+        }
+
+        .hidden-section { display: none !important; opacity: 0; }
+        .visible-section { animation: fadeIn 0.6s ease forwards; display: block; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateZ(-50px); }
+            to { opacity: 1; transform: translateZ(0); }
+        }
+        
+        main { flex: 1; padding-top: 80px; position: relative; z-index: 10; transform-style: preserve-3d; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Animated 3D Background Blobs & Particles -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" style="perspective: 1000px;">
+        <div class="absolute top-[0%] left-[-5%] w-[45vw] h-[45vw] rounded-full bg-emerald-500/20 dark:bg-emerald-600/20 blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
+        <div class="absolute top-[10%] right-[-5%] w-[40vw] h-[40vw] rounded-full bg-rose-500/20 dark:bg-rose-600/20 blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob-delayed"></div>
+        <div class="absolute bottom-[-10%] left-[15%] w-[50vw] h-[50vw] rounded-full bg-amber-500/20 dark:bg-amber-600/20 blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob-fast"></div>
+        <div class="absolute top-[40%] left-[40%] w-[30vw] h-[30vw] rounded-full bg-fuchsia-500/15 dark:bg-fuchsia-600/15 blur-[90px] mix-blend-multiply dark:mix-blend-screen animate-pulse-glow"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" onclick="switchPage('home'); return false;" class="flex items-center gap-3 float-up transform hover:scale-110 hover:rotate-2 transition-transform">
+                    <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-rose-500 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-emerald-500/40 animate-pulse-glow" style="transform-style: preserve-3d;">
+                        <i class="fas fa-layer-group text-xl animate-spin-slow-3d"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">Residential<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-500">VPS</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-4 text-sm">
+                    <a href="#" onclick="switchPage('home'); return false;" id="nav-home" class="nav-link">
+                        <i class="fas fa-home text-emerald-500"></i> Home
+                    </a>
+                    <a href="#" onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'}); return false;" class="nav-link">
+                        <i class="fas fa-compass text-rose-500"></i> Overview
+                    </a>
+                    <a href="#" onclick="switchPage('products'); return false;" id="nav-products" class="nav-link">
+                        <i class="fas fa-server text-amber-500"></i> Residential VPS Plans
+                    </a>
+                    <a href="#" onclick="switchPage('contact'); return false;" id="nav-contact" class="nav-link">
+                        <i class="fas fa-headset text-fuchsia-500"></i> Support
+                    </a>
+                </div>
+
+                <!-- Utilities -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleTheme()" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/60 dark:bg-slate-800/60 backdrop-blur shadow-md hover:scale-110 hover:rotate-12 transition-transform text-slate-700 dark:text-yellow-400 border border-slate-200 dark:border-slate-700">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
+                    <div class="md:hidden">
+                        <button onclick="toggleMobileMenu()" class="text-slate-700 dark:text-white hover:scale-110 transition-transform">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-slate-200/50 dark:border-slate-700/50 absolute w-full">
+            <div class="px-4 py-4 space-y-3 text-center">
+                <a href="#" onclick="switchPage('home'); toggleMobileMenu(); return false;" class="block px-4 py-3 rounded-xl font-bold text-slate-800 dark:text-white bg-slate-100/50 dark:bg-slate-800/50 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800">
+                    <i class="fas fa-home text-emerald-500 mr-2"></i> Home
+                </a>
+                <a href="#" onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'}); toggleMobileMenu(); return false;" class="block px-4 py-3 rounded-xl font-bold text-slate-800 dark:text-white bg-slate-100/50 dark:bg-slate-800/50 hover:bg-rose-50 dark:hover:bg-rose-900/30 transition-all border border-transparent hover:border-rose-200 dark:hover:border-rose-800">
+                    <i class="fas fa-compass text-rose-500 mr-2"></i> Overview
+                </a>
+                <a href="#" onclick="switchPage('products'); toggleMobileMenu(); return false;" class="block px-4 py-3 rounded-xl font-bold text-slate-800 dark:text-white bg-slate-100/50 dark:bg-slate-800/50 hover:bg-amber-50 dark:hover:bg-amber-900/30 transition-all border border-transparent hover:border-amber-200 dark:hover:border-amber-800">
+                    <i class="fas fa-server text-amber-500 mr-2"></i> Residential VPS Plans
+                </a>
+                <a href="#" onclick="switchPage('contact'); toggleMobileMenu(); return false;" class="block px-4 py-3 rounded-xl font-bold text-slate-800 dark:text-white bg-slate-100/50 dark:bg-slate-800/50 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/30 transition-all border border-transparent hover:border-fuchsia-200 dark:hover:border-fuchsia-800">
+                    <i class="fas fa-headset text-fuchsia-500 mr-2"></i> Support
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="content-area">
+        <!-- Home Section -->
+        <section id="home" class="page-view visible-section relative pt-20 lg:pt-32 px-4 pb-20">
+            <div class="max-w-5xl mx-auto text-center relative z-10 mb-24" style="transform-style: preserve-3d;">
+                <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full card-neo mb-8 animate-float-3d-medium">
+                    <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_12px_rgba(52,211,153,0.9)]"></span>
+                    <span class="text-slate-800 dark:text-white font-bold text-sm tracking-wide uppercase">100% Undetectable Footprint</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-slate-900 dark:text-white tracking-tight leading-tight float-up animate-float-3d-slow">
+                    Experience Next-Gen <br />
+                    <span class="text-glow inline-block mt-2" style="transform: translateZ(30px);">3D Residential Cloud Infrastructure</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-12 max-w-4xl mx-auto font-medium leading-relaxed animate-float-3d-fast">
+                    Stop dealing with frustrating IP blocks and endless CAPTCHAs. Launch a truly authentic Residential VPS in under a minute. Whether you are running complex SEO scraping, managing high-security accounts, or handling global surveys, our premium ISP connections keep your operations running smoothly. Say goodbye to limitations and embrace a limitless, reliable digital experience.
+                </p>
+                <div class="animate-float-3d-medium">
+                    <button onclick="switchPage('products')" class="btn-neo px-12 py-5 rounded-full text-lg font-extrabold tracking-wide hover:rotate-3">
+                        Deploy Your Infrastructure <i class="fas fa-space-shuttle ml-2 animate-bounce"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6-Feature Neo Cards with 3D Motion Wrappers -->
+            <div id="overview" class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scroll-mt-32">
+                
+                <div class="motion-wrapper animate-float-3d-slow">
+                    <div class="card-neo p-8 text-center group">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center text-white text-4xl mb-6 shadow-lg shadow-emerald-500/40 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 float-up" style="transform: translateZ(40px);">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 float-up" style="transform: translateZ(25px);">Instant Deployment</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium float-up" style="transform: translateZ(15px);">Launch your VPS instance in seconds with automated provisioning and sophisticated 3D setup environments.</p>
+                    </div>
+                </div>
+                
+                <div class="motion-wrapper animate-float-3d-medium">
+                    <div class="card-neo p-8 text-center group">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-rose-400 to-rose-600 rounded-2xl flex items-center justify-center text-white text-4xl mb-6 shadow-lg shadow-rose-500/40 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300 float-up" style="transform: translateZ(40px);">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 float-up" style="transform: translateZ(25px);">High Performance</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium float-up" style="transform: translateZ(15px);">Experience 1 Gbps uplink connectivity designed for intensive, lightning-fast data transfer speeds.</p>
+                    </div>
+                </div>
+
+                <div class="motion-wrapper animate-float-3d-fast">
+                    <div class="card-neo p-8 text-center group">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center text-white text-4xl mb-6 shadow-lg shadow-amber-500/40 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 float-up" style="transform: translateZ(40px);">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 float-up" style="transform: translateZ(25px);">Residential IPs</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium float-up" style="transform: translateZ(15px);">Utilize genuine ISP/Residential IP addresses that remain unflagged, allowing seamless operation.</p>
+                    </div>
+                </div>
+
+                <div class="motion-wrapper animate-float-3d-fast">
+                    <div class="card-neo p-8 text-center group">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 rounded-2xl flex items-center justify-center text-white text-4xl mb-6 shadow-lg shadow-fuchsia-500/40 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300 float-up" style="transform: translateZ(40px);">
+                            <i class="fab fa-windows"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 float-up" style="transform: translateZ(25px);">Flexible OS</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium float-up" style="transform: translateZ(15px);">Easily switch between robust Linux distributions or Windows platforms to perfectly match your workflow.</p>
+                    </div>
+                </div>
+
+                <div class="motion-wrapper animate-float-3d-slow">
+                    <div class="card-neo p-8 text-center group">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-4xl mb-6 shadow-lg shadow-indigo-500/40 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 float-up" style="transform: translateZ(40px);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 float-up" style="transform: translateZ(25px);">DDoS Protection</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium float-up" style="transform: translateZ(15px);">Rely on advanced security protocols engineered to keep your critical operations completely safe.</p>
+                    </div>
+                </div>
+
+                <div class="motion-wrapper animate-float-3d-medium">
+                    <div class="card-neo p-8 text-center group">
+                        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-pink-400 to-pink-600 rounded-2xl flex items-center justify-center text-white text-4xl mb-6 shadow-lg shadow-pink-500/40 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-300 float-up" style="transform: translateZ(40px);">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 float-up" style="transform: translateZ(25px);">Global Access</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium float-up" style="transform: translateZ(15px);">Benefit from direct network connections optimized for top-tier performance anywhere in the world.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Page Details Filler Call to Action -->
+            <div class="max-w-7xl mx-auto px-4 mt-16 animate-float-3d-slow">
+                <div class="card-neo p-12 text-center relative overflow-hidden group border-emerald-400/50">
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-rose-500/10 to-emerald-500/10 transform scale-150 group-hover:scale-100 group-hover:rotate-3 transition-transform duration-700 animate-border-flow"></div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 relative z-10 float-up" style="transform: translateZ(30px);">Ready to supercharge your operations?</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 relative z-10 float-up max-w-2xl mx-auto" style="transform: translateZ(20px);">Join elite users deploying high-performance Residential VPS nodes today. Full root access, lightning network speeds, and clean static IPs await you.</p>
+                    <button onclick="switchPage('products')" class="btn-neo px-10 py-4 rounded-full text-lg font-bold relative z-10 float-up" style="transform: translateZ(40px);">
+                        <i class="fas fa-server mr-2"></i> View Pricing & Plans
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="page-view hidden-section py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16 float-up" style="transform: translateZ(30px);">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900 dark:text-white">Choose Your <span class="text-glow">Residential Infrastructure</span></h2>
+                    <p class="text-xl text-slate-600 dark:text-slate-400 font-medium">Global networks right at your fingertips.</p>
+                </div>
+
+                <!-- 3D Tabs with Live Flags -->
+                <div class="flex justify-center gap-4 mb-16 flex-wrap float-up" style="transform: translateZ(20px);">
+                    <button onclick="toggleProductTab('us')" id="tab-us" class="tab-btn tab-active">
+                        <img src="https://flagcdn.com/w40/us.png" alt="US Flag" class="tab-flag"> United States VPS
+                    </button>
+                    <button onclick="toggleProductTab('uk')" id="tab-uk" class="tab-btn tab-inactive">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="UK Flag" class="tab-flag"> United Kingdom VPS
+                    </button>
+                    <button onclick="toggleProductTab('au')" id="tab-au" class="tab-btn tab-inactive">
+                        <img src="https://flagcdn.com/w40/au.png" alt="AU Flag" class="tab-flag"> Australia VPS
+                    </button>
+                    <button onclick="toggleProductTab('ca')" id="tab-ca" class="tab-btn tab-inactive">
+                        <img src="https://flagcdn.com/w40/ca.png" alt="CA Flag" class="tab-flag"> Canada VPS
+                    </button>
+                    <button onclick="toggleProductTab('fr')" id="tab-fr" class="tab-btn tab-inactive">
+                        <img src="https://flagcdn.com/w40/fr.png" alt="FR Flag" class="tab-flag"> France VPS
+                    </button>
+                    <button onclick="toggleProductTab('de')" id="tab-de" class="tab-btn tab-inactive">
+                        <img src="https://flagcdn.com/w40/de.png" alt="DE Flag" class="tab-flag"> Germany VPS
+                    </button>
+                    <button onclick="toggleProductTab('es')" id="tab-es" class="tab-btn tab-inactive">
+                        <img src="https://flagcdn.com/w40/es.png" alt="ES Flag" class="tab-flag"> Spain VPS
+                    </button>
+                    <button onclick="toggleProductTab('physical')" id="tab-physical" class="tab-btn tab-inactive border-2 border-emerald-500 text-emerald-600 dark:text-emerald-400">
+                        <img src="https://flagcdn.com/w40/us.png" alt="US Flag" class="tab-flag"> United States Physical Machine
+                    </button>
+                </div>
+                
+                <!-- UNITED STATES -->
+                <div id="product-us" class="product-group">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto pt-6" style="transform-style: preserve-3d;">
+                        
+                        <div class="motion-wrapper animate-float-3d-slow w-full">
+                            <div class="card-neo p-8 flex flex-col">
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-1 float-up">Basic VPS</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 float-up">Entry-level United States Node</p>
+                                <div class="mb-6 float-up"><span class="text-5xl font-black text-slate-900 dark:text-white">$20</span><span class="text-slate-500 font-bold">/mo</span></div>
+                                <ul class="space-y-2 mb-8 flex-1 float-up w-full">
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-microchip"></i></div><span class="detail-label">CPU</span></div><span class="detail-value">2 Cores</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-memory"></i></div><span class="detail-label">RAM</span></div><span class="detail-value">2GB</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-hdd"></i></div><span class="detail-label">Storage</span></div><span class="detail-value">40GB NVMe</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-tachometer-alt"></i></div><span class="detail-label">Network</span></div><span class="detail-value">1Gbps</span></li>
+                                    <li class="detail-item border-emerald-500/30"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-globe-americas"></i></div><span class="detail-label">IP Address</span></div><span class="detail-value text-emerald-600 dark:text-emerald-400">1 IPv4 Residential IP</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-shield-alt"></i></div><span class="detail-label">Security</span></div><span class="detail-value">DDoS Protection</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-desktop"></i></div><span class="detail-label">OS</span></div><span class="detail-value">Linux / Windows</span></li>
+                                </ul>
+                                <a href="https://t.me/ResidentialHost" target="_blank" class="w-full block text-center btn-neo py-3 rounded-xl font-bold float-up" style="transform: translateZ(25px);">Deploy Instance</a>
+                            </div>
+                        </div>
+                        
+                        <div class="motion-wrapper animate-float-3d-medium w-full z-10">
+                            <div class="card-neo p-8 flex flex-col transform md:scale-105 live-border shadow-[0_0_40px_rgba(16,185,129,0.4)]">
+                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-500 to-rose-500 text-white text-sm font-black px-6 py-2 rounded-full shadow-lg float-up whitespace-nowrap animate-pulse-glow z-20" style="transform: translateX(-50%) translateZ(40px);">🔥 15% OFF - POPULAR</div>
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-1 mt-2 float-up">Starter VPS</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 float-up">Standard United States Operations</p>
+                                <div class="mb-6 float-up flex items-center">
+                                    <span class="line-through text-slate-400 text-xl font-bold mr-2">$40</span>
+                                    <span class="text-6xl font-black text-glow">$34</span><span class="text-slate-500 font-bold ml-1">/mo</span>
+                                </div>
+                                <ul class="space-y-2 mb-8 flex-1 float-up w-full">
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-microchip"></i></div><span class="detail-label">CPU</span></div><span class="detail-value">4 Cores</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-memory"></i></div><span class="detail-label">RAM</span></div><span class="detail-value">4GB</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-hdd"></i></div><span class="detail-label">Storage</span></div><span class="detail-value">60GB NVMe</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-tachometer-alt"></i></div><span class="detail-label">Network</span></div><span class="detail-value">1Gbps</span></li>
+                                    <li class="detail-item border-emerald-500/30"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-globe-americas"></i></div><span class="detail-label">IP Address</span></div><span class="detail-value text-emerald-600 dark:text-emerald-400">1 IPv4 Residential IP</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-shield-alt"></i></div><span class="detail-label">Security</span></div><span class="detail-value">DDoS Protection</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-desktop"></i></div><span class="detail-label">OS</span></div><span class="detail-value">Linux / Windows</span></li>
+                                </ul>
+                                <a href="https://t.me/ResidentialHost" target="_blank" class="w-full block text-center btn-neo py-4 rounded-xl font-bold text-lg float-up" style="transform: translateZ(30px);">Deploy Instance</a>
+                            </div>
+                        </div>
+                        
+                        <div class="motion-wrapper animate-float-3d-fast w-full">
+                            <div class="card-neo p-8 flex flex-col relative">
+                                <div class="absolute -top-4 right-4 bg-gradient-to-r from-amber-500 to-rose-600 text-white text-xs font-black px-5 py-1.5 rounded-full shadow-lg float-up transform rotate-3 border border-white/20 z-20" style="transform: translateZ(35px) rotate(3deg);">🔥 20% OFF</div>
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-1 float-up">Professional VPS</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 float-up">Heavy United States Workloads</p>
+                                <div class="mb-6 float-up flex items-center">
+                                    <span class="line-through text-slate-400 text-xl font-bold mr-2">$80</span>
+                                    <span class="text-5xl font-black text-slate-900 dark:text-white">$64</span><span class="text-slate-500 font-bold ml-1">/mo</span>
+                                </div>
+                                <ul class="space-y-2 mb-8 flex-1 float-up w-full">
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-microchip"></i></div><span class="detail-label">CPU</span></div><span class="detail-value">8 Cores</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-memory"></i></div><span class="detail-label">RAM</span></div><span class="detail-value">8GB</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-hdd"></i></div><span class="detail-label">Storage</span></div><span class="detail-value">100GB NVMe</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-tachometer-alt"></i></div><span class="detail-label">Network</span></div><span class="detail-value">1Gbps</span></li>
+                                    <li class="detail-item border-emerald-500/30"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-globe-americas"></i></div><span class="detail-label">IP Address</span></div><span class="detail-value text-emerald-600 dark:text-emerald-400">1 IPv4 Residential IP</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-shield-alt"></i></div><span class="detail-label">Security</span></div><span class="detail-value">DDoS Protection</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-desktop"></i></div><span class="detail-label">OS</span></div><span class="detail-value">Linux / Windows</span></li>
+                                </ul>
+                                <a href="https://t.me/ResidentialHost" target="_blank" class="w-full block text-center btn-neo py-3 rounded-xl font-bold float-up" style="transform: translateZ(25px);">Deploy Instance</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- US PHYSICAL (Unchanged Prices) -->
+                <div id="product-physical" class="product-group hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto pt-6" style="transform-style: preserve-3d;">
+                        <div class="motion-wrapper animate-float-3d-slow w-full">
+                            <div class="card-neo p-8 flex flex-col w-full">
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-1 float-up">STARTER Baremetal</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 float-up">Dedicated US Hardware</p>
+                                <div class="mb-6 float-up"><span class="text-5xl font-black text-slate-900 dark:text-white">$150</span><span class="text-slate-500 font-bold">/mo</span></div>
+                                <ul class="space-y-2 mb-8 flex-1 float-up w-full">
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-microchip"></i></div><span class="detail-label">Processor</span></div><span class="detail-value">Xeon® E3-1230 v5</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-memory"></i></div><span class="detail-label">RAM</span></div><span class="detail-value">16GB</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-hdd"></i></div><span class="detail-label">Storage</span></div><span class="detail-value">256GB NVMe</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-network-wired"></i></div><span class="detail-label">Network</span></div><span class="detail-value">100Mbps Port</span></li>
+                                    <li class="detail-item border-emerald-500/30"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-server"></i></div><span class="detail-label">IPs</span></div><span class="detail-value text-emerald-600 dark:text-emerald-400">4 Residential IPv4</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-shield-alt"></i></div><span class="detail-label">Security</span></div><span class="detail-value">Advanced DDoS Protection</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-desktop"></i></div><span class="detail-label">OS</span></div><span class="detail-value">Linux or Windows</span></li>
+                                </ul>
+                                <a href="https://t.me/ResidentialHost" target="_blank" class="w-full block text-center btn-neo py-3 rounded-xl font-bold float-up">Deploy Server</a>
+                            </div>
+                        </div>
+                        <div class="motion-wrapper animate-float-3d-medium w-full z-10">
+                            <div class="card-neo p-8 flex flex-col transform md:scale-105 live-border shadow-[0_0_30px_rgba(16,185,129,0.3)] w-full">
+                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-500 to-rose-500 text-white text-sm font-black px-6 py-2 rounded-full shadow-lg float-up animate-pulse-glow z-20" style="transform: translateX(-50%) translateZ(40px);">POPULAR</div>
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-1 mt-2 float-up">PRO Baremetal</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 float-up">Dedicated US Hardware</p>
+                                <div class="mb-6 float-up"><span class="text-6xl font-black text-glow">$550</span><span class="text-slate-500 font-bold">/mo</span></div>
+                                <ul class="space-y-2 mb-8 flex-1 float-up w-full">
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-microchip"></i></div><span class="detail-label">Processor</span></div><span class="detail-value">Xeon® E3-1230 v5</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-memory"></i></div><span class="detail-label">RAM</span></div><span class="detail-value">16GB</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-hdd"></i></div><span class="detail-label">Storage</span></div><span class="detail-value">256GB NVMe</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-network-wired"></i></div><span class="detail-label">Network</span></div><span class="detail-value">1Gbps Port</span></li>
+                                    <li class="detail-item border-emerald-500/30"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-server"></i></div><span class="detail-label">IPs</span></div><span class="detail-value text-emerald-600 dark:text-emerald-400">254 Residential IPv4</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-shield-alt"></i></div><span class="detail-label">Security</span></div><span class="detail-value">Advanced DDoS Protection</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-desktop"></i></div><span class="detail-label">OS</span></div><span class="detail-value">Linux or Windows</span></li>
+                                </ul>
+                                <a href="https://t.me/ResidentialHost" target="_blank" class="w-full block text-center btn-neo py-4 rounded-xl font-bold text-lg float-up">Deploy Server</a>
+                            </div>
+                        </div>
+                        <div class="motion-wrapper animate-float-3d-fast w-full">
+                            <div class="card-neo p-8 flex flex-col w-full">
+                                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-1 float-up">ELITE Baremetal</h3>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 float-up">Dedicated US Hardware</p>
+                                <div class="mb-6 float-up"><span class="text-5xl font-black text-slate-900 dark:text-white">$999</span><span class="text-slate-500 font-bold">/mo</span></div>
+                                <ul class="space-y-2 mb-8 flex-1 float-up w-full">
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-microchip"></i></div><span class="detail-label">Processor</span></div><span class="detail-value">Xeon® E5-2680 v4</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-memory"></i></div><span class="detail-label">RAM</span></div><span class="detail-value">256GB</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-hdd"></i></div><span class="detail-label">Storage</span></div><span class="detail-value">4TB NVMe</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-network-wired"></i></div><span class="detail-label">Network</span></div><span class="detail-value">1Gbps Port</span></li>
+                                    <li class="detail-item border-emerald-500/30"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-server"></i></div><span class="detail-label">IPs</span></div><span class="detail-value text-emerald-600 dark:text-emerald-400">254 Residential IPv4</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-shield-alt"></i></div><span class="detail-label">Security</span></div><span class="detail-value">Advanced DDoS Protection</span></li>
+                                    <li class="detail-item"><div class="detail-label-wrapper"><div class="list-icon"><i class="fas fa-desktop"></i></div><span class="detail-label">OS</span></div><span class="detail-value">Linux or Windows</span></li>
+                                </ul>
+                                <a href="https://t.me/ResidentialHost" target="_blank" class="w-full block text-center btn-neo py-3 rounded-xl font-bold float-up">Deploy Server</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="page-view hidden-section py-20 flex items-center justify-center min-h-[60vh]">
+            <div class="max-w-3xl mx-auto px-4 w-full animate-float-3d-slow">
+                <div class="card-neo p-12 text-center group live-border">
+                    <div class="w-24 h-24 mx-auto bg-gradient-to-tr from-emerald-500 to-rose-600 rounded-full flex items-center justify-center text-white text-5xl mb-8 shadow-xl shadow-emerald-500/40 group-hover:scale-110 group-hover:rotateY(180deg) transition-transform duration-700 float-up animate-pulse-glow" style="transform-style: preserve-3d;">
+                        <i class="fab fa-telegram-plane ml-[-4px] mt-[4px]" style="transform: translateZ(30px);"></i>
+                    </div>
+                    <h3 class="text-4xl font-extrabold text-slate-900 dark:text-white mb-4 float-up" style="transform: translateZ(25px);">Technical Support for your VPS</h3>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-10 font-medium float-up max-w-xl mx-auto" style="transform: translateZ(15px);">
+                        Need assistance with your Residential VPS deployment or exploring custom baremetal configurations?<br>
+                        Reach out to our elite engineering team directly on Telegram.
+                    </p>
+                    <a href="https://t.me/ResidentialHost" target="_blank" class="inline-flex items-center gap-3 btn-neo px-10 py-4 rounded-full font-bold text-lg float-up" style="transform: translateZ(35px);">
+                        <i class="fab fa-telegram"></i> Chat with Engineers
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-nav py-8 relative z-50 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-slate-900 dark:text-white font-extrabold text-xl text-center md:text-left hover:rotate-1 transition-transform">
+                Residential<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-rose-500">VPS</span>
+                <div class="text-slate-500 font-medium text-sm mt-1">
+                    &copy; 2026 ResidentialVPS.me - Premium Residential VPS Provider. All rights reserved.
+                </div>
+            </div>
+            
+            <!-- Payment Gateway Pill -->
+            <div class="flex items-center gap-4 bg-slate-100 dark:bg-slate-800/80 px-6 py-3 rounded-full border border-slate-200 dark:border-slate-700 shadow-sm transition-transform hover:scale-110 hover:-rotate-1 animate-float-3d-medium">
+                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=029" alt="USDT" class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity" title="Tether (USDT)">
+                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" alt="BTC" class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity" title="Bitcoin (BTC)">
+                <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png?v=029" alt="LTC" class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity" title="Litecoin (LTC)">
+                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=029" alt="ETH" class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity" title="Ethereum (ETH)">
+                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=029" alt="Binance" class="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity" title="Binance Coin (BNB)">
+                <img src="https://seeklogo.com/images/B/bybit-logo-4C31FD6A08-seeklogo.com.png" alt="Bybit" class="h-5 w-auto opacity-80 hover:opacity-100 transition-opacity filter grayscale hover:grayscale-0" title="Bybit">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(page => {
+                page.classList.remove('visible-section');
+                page.classList.add('hidden-section');
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.remove('hidden-section');
+                target.classList.add('visible-section');
+            }
+            
+            const activeLink = document.getElementById('nav-' + pageId);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleProductTab(tabId) {
+            const tabs = ['us', 'uk', 'au', 'ca', 'fr', 'de', 'es', 'physical'];
+            
+            tabs.forEach(id => {
+                const btn = document.getElementById('tab-' + id);
+                const content = document.getElementById('product-' + id);
+                
+                if (btn && content) {
+                    if (id === tabId) {
+                        btn.classList.add('tab-active');
+                        btn.classList.remove('tab-inactive');
+                        
+                        if(id === 'physical') {
+                            btn.classList.remove('border-2', 'border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400');
+                        }
+                        
+                        content.classList.remove('hidden');
+                        content.style.animation = 'none';
+                        content.offsetHeight; /* trigger reflow */
+                        content.style.animation = 'fadeIn 0.6s ease forwards';
+                    } else {
+                        btn.classList.add('tab-inactive');
+                        btn.classList.remove('tab-active');
+                        
+                        if(id === 'physical') {
+                            btn.classList.add('border-2', 'border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400');
+                        }
+                        
+                        content.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.getElementById('theme-icon').classList.replace('fa-sun', 'fa-moon');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('theme-icon').classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchPage('home');
+            if (document.documentElement.classList.contains('dark')) {
+                document.getElementById('theme-icon').classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+    </script>
+</body>
+</html>
